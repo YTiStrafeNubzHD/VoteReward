@@ -15,7 +15,7 @@ class RequestThread extends AsyncTask {
     $this->queries = $queries;
   }
 
-  public function onRun() {
+  public function onRun(): void {
     foreach($this->queries as $query) {
       if(($return = Utils::getURL(str_replace("{USERNAME}", urlencode($this->id), $query->getCheckURL()))) != false && is_array(($return = json_decode($return, true))) && isset($return["voted"]) && is_bool($return["voted"]) && isset($return["claimed"]) && is_bool($return["claimed"])) {
         $query->setVoted($return["voted"] ? 1 : -1);
