@@ -41,7 +41,7 @@ class RequestThread extends AsyncTask {
     }
   }
 
-  public function onCompletion(Server $server): void {
+  public function onCompletion(): void {
     if(isset($this->error)) {
       $server->getPluginManager()->getPlugin("VoteReward")->getLogger()->error($this->error);
     }
