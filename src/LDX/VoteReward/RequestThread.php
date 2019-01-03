@@ -41,12 +41,12 @@ class RequestThread extends AsyncTask {
     }
   }
 
-  public function onCompletion(): void {
+  public function onCompletion(): void{
     if(isset($this->error)) {
-      $server->getPluginManager()->getPlugin("VoteReward")->getLogger()->error($this->error);
+      Server::getInstance()->getPluginManager()->getPlugin("VoteReward")->getLogger()->error($this->error);
     }
-    $server->getPluginManager()->getPlugin("VoteReward")->rewardPlayer($server->getPlayerExact($this->id), $this->rewards);
-    array_splice($server->getPluginManager()->getPlugin("VoteReward")->queue, array_search($this->id, $server->getPluginManager()->getPlugin("VoteReward")->queue, true), 1);
-  }
 
+    Server::getInstance()->getPluginManager()->getPlugin("VoteReward")->rewardPlayer(Server::getInstance()->getPlayerExact($this->id), $this->rewards);
+    array_splice(Server::getInstance()->getPluginManager()->getPlugin("VoteReward")->queue, array_search($this->id, Server::getInstance()->getPluginManager()->getPlugin("VoteReward")->queue, true), 1);
+  }
 }
